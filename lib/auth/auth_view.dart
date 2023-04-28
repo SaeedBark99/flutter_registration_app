@@ -72,17 +72,21 @@ class LogWidget extends StatelessWidget {
               ),
               DefaultTextFromFile(
                 controller: passwordController,
-                isPassword: controller.isPassword,
+                obscureText: controller.isVisibilty ? false : true,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please you must fill password here..';
                   }
                   return null;
                 },
-                suffix: controller.suffix,
-                onTap: () {
-                  controller.changPasswordShow();
-                },
+                suffix: IconButton(
+                  onPressed: () {
+                    controller.isVisibilty;
+                  },
+                  icon: controller.isVisibilty
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
+                ),
                 lable: 'Password',
                 prefix: Icons.password,
               ),

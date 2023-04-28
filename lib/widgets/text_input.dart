@@ -7,10 +7,10 @@ class DefaultTextFromFile extends StatelessWidget {
   IconData? prefix;
   TextInputType? type;
   Function? validator;
-  IconData? suffix;
+  Widget? suffix;
   bool enable;
   VoidCallback? onTap;
-  bool isPassword;
+  bool obscureText;
 
   DefaultTextFromFile({
     super.key,
@@ -23,14 +23,14 @@ class DefaultTextFromFile extends StatelessWidget {
     this.validator,
     this.suffix,
     this.enable = true,
-    this.isPassword = false,
+    this.obscureText = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      obscureText: isPassword,
+      obscureText: obscureText,
       onTap: onTap,
       keyboardType: type,
       onFieldSubmitted: (d) {
@@ -41,7 +41,7 @@ class DefaultTextFromFile extends StatelessWidget {
       decoration: InputDecoration(
         labelText: lable,
         prefixIcon: Icon(prefix),
-        suffixIcon: suffix != null ? Icon(suffix) : null,
+        suffixIcon: suffix,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
         ),
