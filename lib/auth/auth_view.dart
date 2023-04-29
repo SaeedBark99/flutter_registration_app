@@ -26,16 +26,12 @@ class LogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var formkey = GlobalKey<FormState>();
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
-
     final controller = context.watch<AuthController>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-          key: formkey,
+          key: controller.formkey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +53,7 @@ class LogWidget extends StatelessWidget {
                 height: 30,
               ),
               DefaultTextFromFile(
-                controller: emailController,
+                controller: controller.emailController,
                 type: TextInputType.emailAddress,
                 validator: (value) {
                   if (value.isEmpty) {
@@ -72,7 +68,7 @@ class LogWidget extends StatelessWidget {
                 height: 10,
               ),
               DefaultTextFromFile(
-                controller: passwordController,
+                controller: controller.passwordController,
                 obscureText: controller.isVisibilty ? false : true,
                 validator: (value) {
                   if (value.isEmpty) {
@@ -99,11 +95,11 @@ class LogWidget extends StatelessWidget {
                 builder:(context) => DefaultBottom(
                   color: AppColor.primaryColor,
                   function: () {
-                    if (formkey.currentState!.validate()) {
+                    if (controller.formkey.currentState!.validate()) {
                       controller
                           .login(
-                              email: emailController.text,
-                              password: passwordController.text);
+                              email: controller.emailController.text,
+                              password:controller. passwordController.text);
                       navigatorAndReplace(context, const LandingView());
                     }
                   },

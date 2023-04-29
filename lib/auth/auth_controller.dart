@@ -9,6 +9,10 @@ class AuthController with ChangeNotifier {
   bool isLoading = true;
   FirebaseAuth auth = FirebaseAuth.instance;
 
+  final formkey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   void visibilty() {
     isVisibilty = !isVisibilty;
     notifyListeners();
