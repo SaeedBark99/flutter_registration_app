@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_registration_app/auth/auth_view.dart';
 
-void main() {
-  // await Firebase.initializeApp();
-  runApp(const FlutterRegistration());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
+  runApp( FlutterRegistration());
 }
 
 class FlutterRegistration extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_registration_app/auth/auth_controller.dart';
 import 'package:flutter_registration_app/configs/colors.dart';
@@ -81,7 +82,7 @@ class LogWidget extends StatelessWidget {
                 },
                 suffix: IconButton(
                   onPressed: () {
-                    controller.isVisibilty;
+                     controller.visibilty();
                   },
                   icon: controller.isVisibilty
                       ? const Icon(Icons.visibility_off)
@@ -93,11 +94,23 @@ class LogWidget extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              DefaultBottom(
-                color: AppColor.primaryColor,
-                function: () {},
-                text: 'LOgin',
-                isUpperCase: true,
+              ConditionalBuilder(
+                condition:  controller.isLoading ,
+                builder:(context) => DefaultBottom(
+                  color: AppColor.primaryColor,
+                  function: () {
+                    if (formkey.currentState!.validate()) {
+                      controller
+                          .login(
+                              email: emailController.text,
+                              password: passwordController.text);
+                      navigatorAndReplace(context, const LandingView());
+                    }
+                  },
+                  text: 'LOgin',
+                  isUpperCase: true,
+                ),
+                fallback: (context) => const CircularProgressIndicator(),
               ),
             ],
           ),
