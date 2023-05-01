@@ -1,12 +1,15 @@
 class LoginModel {
-  String email;
-  String uid;
+  String? email;
+  String? uid;
 
   LoginModel({
-    required this.email,
-    required this.uid,
+     this.email,
+     this.uid,
   });
-
+LoginModel.fromjson(Map<String , dynamic> json){
+  email = json['email'];
+  uid = json['uid'];
+}
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,

@@ -1,31 +1,27 @@
-class UserModel {
+class RegistrationModel {
   String? name;
-  String? email;
-  String? phone;
+  String? uid;
   String? idNational;
   String? whatsAppNumber;
   String? placeOfElectin;
-  UserModel(
+  RegistrationModel(
       {this.name,
-      this.email,
-      this.phone,
+      this.uid,
       this.idNational,
       this.whatsAppNumber,
       this.placeOfElectin});
-  UserModel.formJson(Map<String, dynamic> json) {
+  RegistrationModel.formJson(Map<String, dynamic> json) {
     name = json['name'];
-    email = json['email'];
-    phone = json['phone'];
     idNational = json['idNational'];
     whatsAppNumber = json['whatsAppNumber'];
     placeOfElectin = json['placeOfElectin'];
+    uid = json['uid'];
   }
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'email': email,
-      'phone': phone,
+      'uid': uid,
       'idNational': idNational,
       'whatsAppNumber': whatsAppNumber,
       'placeOfElectin': placeOfElectin,

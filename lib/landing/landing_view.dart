@@ -1,71 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_registration_app/configs/style_Text.dart';
+import 'package:flutter_registration_app/helpers/navigator.dart';
+import 'package:flutter_registration_app/landing/landing_controller.dart';
+import 'package:flutter_registration_app/landing/landing_model.dart';
+import 'package:flutter_registration_app/registration/registration_view.dart';
+import 'package:provider/provider.dart';
 
 class LandingView extends StatelessWidget {
   const LandingView({super.key});
 
+  static const routeName = 'landing';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          'List',
-          style: StyleTexts.stylefont25,
+    return ChangeNotifierProvider(
+      create: (_) => LandingController(),
+      lazy: true,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            'List',
+            style: StyleTexts.stylefont25,
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      floatingActionButton: CircleAvatar(
-        radius: 25,
-        child: IconButton(
-          color: Colors.white,
-          onPressed: () {},
-          icon: const Icon(Icons.add),
+        floatingActionButton: CircleAvatar(
+          radius: 25,
+          child: IconButton(
+            color: Colors.white,
+            onPressed: () {
+              AppNavigator.push(Registration.routeName);
+            },
+            icon: const Icon(Icons.add),
+          ),
         ),
-      ),
-      body: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) => const ListItem(),
-        separatorBuilder: (BuildContext context, int index) => const SizedBox(
-          height: 2,
+        body: Consumer<LandingController>(
+          builder: (_, model, child) => ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              return ListItem(
+                name: model.dataUser[index].name!,
+                city: model.dataUser[index].placeOfElectin!,
+                idNational: model.dataUser[index].idNational!,
+                whatsAppNumber: model.dataUser[index].whatsAppNumber!,
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(
+              height: 2,
+            ),
+            itemCount: model.dataUser.length,
+          ),
         ),
-        itemCount: 10,
       ),
     );
   }
 }
 
 class ListItem extends StatelessWidget {
-  const ListItem({Key? key}) : super(key: key);
-
+  const ListItem({
+    Key? key,
+    required this.name,
+    required this.whatsAppNumber,
+    required this.idNational,
+    required this.city,
+  }) : super(key: key);
+  final String name;
+  final String whatsAppNumber;
+  final String idNational;
+  final String city;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 10),
       child: Card(
-        elevation: 0.2,
+        elevation: 0.5,
         child: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 20, right: 10),
           width: double.infinity,
-          height: 100,
+          height: 120,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Saeed', style: StyleTexts.stylefont25),
+              Text(name, style: StyleTexts.stylefont25),
               const SizedBox(
                 height: 5,
               ),
-              const Text('ID_1254'),
+              Text(idNational),
               const SizedBox(
                 height: 5,
               ),
-              const Text('Nouackchott'),
+              Text(city),
               const SizedBox(
                 height: 5,
               ),
-              const Text('+222 42517869'),
+              Text(whatsAppNumber),
             ],
           ),
         ),

@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 
 class DefaultBottom extends StatelessWidget {
-  Color color;
+  Color? color;
   double width;
   double raduis;
   bool isUpperCase;
   Function function;
   String text;
    DefaultBottom({super.key,
-    required this. color ,
+     this. color ,
     this. width = double.infinity,
     this. raduis = 15,
     this. isUpperCase = true,

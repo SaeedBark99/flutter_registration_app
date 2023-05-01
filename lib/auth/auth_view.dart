@@ -2,22 +2,17 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_registration_app/auth/auth_controller.dart';
 import 'package:flutter_registration_app/configs/colors.dart';
-import 'package:flutter_registration_app/landing/landing_view.dart';
 import 'package:flutter_registration_app/widgets/default_bottom.dart';
 import 'package:flutter_registration_app/widgets/default_text.dart';
-import 'package:flutter_registration_app/widgets/navigator_page.dart';
 import 'package:flutter_registration_app/widgets/text_input.dart';
 import 'package:provider/provider.dart';
 
 class AuthView extends StatelessWidget {
   const AuthView({Key? key}) : super(key: key);
-
+  static const routeName = 'auth';
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AuthController(),
-      child: LogWidget(),
-    );
+    return LogWidget();
   }
 }
 
@@ -78,7 +73,7 @@ class LogWidget extends StatelessWidget {
                 },
                 suffix: IconButton(
                   onPressed: () {
-                     controller.visibilty();
+                    controller.visibilty();
                   },
                   icon: controller.isVisibilty
                       ? const Icon(Icons.visibility_off)
@@ -91,16 +86,15 @@ class LogWidget extends StatelessWidget {
                 height: 30,
               ),
               ConditionalBuilder(
-                condition:  controller.isLoading ,
-                builder:(context) => DefaultBottom(
+                condition: controller.isLoading,
+                builder: (context) => DefaultBottom(
                   color: AppColor.primaryColor,
                   function: () {
                     if (controller.formkey.currentState!.validate()) {
-                      controller
-                          .login(
-                              email: controller.emailController.text,
-                              password:controller. passwordController.text);
-                      navigatorAndReplace(context, const LandingView());
+                      controller.login(
+                          email: controller.emailController.text,
+                          password: controller.passwordController.text);
+                      //   navigatorAndReplace(context, const LandingView());
                     }
                   },
                   text: 'LOgin',
