@@ -1,21 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class RegistrationModel {
   String? name;
   String? uid;
   String? idNational;
   String? whatsAppNumber;
   String? placeOfElectin;
-  RegistrationModel(
-      {this.name,
-      this.uid,
-      this.idNational,
-      this.whatsAppNumber,
-      this.placeOfElectin});
+  String? dateTime;
+  RegistrationModel({
+    this.name,
+    this.uid,
+    this.idNational,
+    this.whatsAppNumber,
+    this.placeOfElectin,
+    this.dateTime,
+  });
   RegistrationModel.formJson(Map<String, dynamic> json) {
     name = json['name'];
+    uid = json['uid'];
     idNational = json['idNational'];
     whatsAppNumber = json['whatsAppNumber'];
     placeOfElectin = json['placeOfElectin'];
-    uid = json['uid'];
+    dateTime = json['dateTime'];
   }
 
   Map<String, dynamic> toMap() {
@@ -25,6 +31,7 @@ class RegistrationModel {
       'idNational': idNational,
       'whatsAppNumber': whatsAppNumber,
       'placeOfElectin': placeOfElectin,
+      'dateTime': dateTime,
     };
   }
 }

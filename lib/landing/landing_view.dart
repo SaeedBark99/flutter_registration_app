@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_registration_app/configs/colors.dart';
 import 'package:flutter_registration_app/configs/style_Text.dart';
 import 'package:flutter_registration_app/helpers/navigator.dart';
 import 'package:flutter_registration_app/landing/landing_controller.dart';
-import 'package:flutter_registration_app/landing/landing_model.dart';
 import 'package:flutter_registration_app/registration/registration_view.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class LandingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => LandingController(),
+      create: (_) => LandingController()..getDataUser(),
       lazy: true,
       child: Scaffold(
         appBar: AppBar(
@@ -27,6 +27,7 @@ class LandingView extends StatelessWidget {
         ),
         floatingActionButton: CircleAvatar(
           radius: 25,
+          backgroundColor: AppColor.primaryColor,
           child: IconButton(
             color: Colors.white,
             onPressed: () {
@@ -79,23 +80,48 @@ class ListItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.only(left: 20, right: 10),
           width: double.infinity,
-          height: 120,
+          height: 110,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(name, style: StyleTexts.stylefont25),
               const SizedBox(
                 height: 5,
               ),
-              Text(idNational),
+              Text('ID_ $idNational'),
               const SizedBox(
                 height: 5,
               ),
-              Text(city),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_city_outlined,
+                    size: 15,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(city),
+                ],
+              ),
               const SizedBox(
                 height: 5,
               ),
-              Text(whatsAppNumber),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.chat_outlined,
+                    size: 15,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(whatsAppNumber),
+                ],
+              ),
             ],
           ),
         ),

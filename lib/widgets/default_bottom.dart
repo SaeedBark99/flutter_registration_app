@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class DefaultBottom extends StatelessWidget {
@@ -8,13 +7,14 @@ class DefaultBottom extends StatelessWidget {
   bool isUpperCase;
   Function function;
   String text;
-   DefaultBottom({super.key,
-     this. color ,
-    this. width = double.infinity,
-    this. raduis = 15,
-    this. isUpperCase = true,
-    required this. function,
-    required this. text,
+  DefaultBottom({
+    super.key,
+    this.color,
+    this.width = double.infinity,
+    this.raduis = 15,
+    this.isUpperCase = true,
+    required this.function,
+    required this.text,
   });
 
   @override

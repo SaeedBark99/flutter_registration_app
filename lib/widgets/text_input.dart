@@ -11,6 +11,7 @@ class DefaultTextFromFile extends StatelessWidget {
   bool enable;
   VoidCallback? onTap;
   bool obscureText;
+  int? maxLength;
 
   DefaultTextFromFile({
     super.key,
@@ -22,6 +23,7 @@ class DefaultTextFromFile extends StatelessWidget {
     this.type,
     this.validator,
     this.suffix,
+    this.maxLength,
     this.enable = true,
     this.obscureText = false,
   });
@@ -31,6 +33,7 @@ class DefaultTextFromFile extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      maxLength: maxLength,
       onTap: onTap,
       keyboardType: type,
       onFieldSubmitted: (d) {

@@ -12,7 +12,7 @@ class AuthView extends StatelessWidget {
   static const routeName = 'auth';
   @override
   Widget build(BuildContext context) {
-    return LogWidget();
+    return const LogWidget();
   }
 }
 
@@ -26,7 +26,7 @@ class LogWidget extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-          key: controller.formkey,
+          key: controller.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -90,14 +90,14 @@ class LogWidget extends StatelessWidget {
                 builder: (context) => DefaultBottom(
                   color: AppColor.primaryColor,
                   function: () {
-                    if (controller.formkey.currentState!.validate()) {
+                    if (controller.formKey.currentState!.validate()) {
                       controller.login(
                           email: controller.emailController.text,
                           password: controller.passwordController.text);
                       //   navigatorAndReplace(context, const LandingView());
                     }
                   },
-                  text: 'LOgin',
+                  text: 'Login',
                   isUpperCase: true,
                 ),
                 fallback: (context) => const CircularProgressIndicator(),

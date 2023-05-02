@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_registration_app/auth/auth_model.dart';
 import 'package:flutter_registration_app/auth/auth_view.dart';
 import 'package:flutter_registration_app/helpers/navigator.dart';
 import 'package:flutter_registration_app/landing/landing_view.dart';
+import 'package:flutter_registration_app/widgets/showToast.dart';
 
 class AuthController with ChangeNotifier {
   AuthController() {
@@ -16,7 +16,7 @@ class AuthController with ChangeNotifier {
   bool isLoading = true;
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  final formkey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -28,28 +28,22 @@ class AuthController with ChangeNotifier {
   Future<void> login({
     required String email,
     required String password,
-    //  required placeOfElectin,
   }) async {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      createUsers(uid: value.user!.uid, email: email);
-      notifyListeners();
-      AppNavigator.pushReplacement('landing');
+      FirebaseFirestore.instance.collection('users').doc();
+      showToasts(
+        color: Colors.green,
+        text: 'success',
+      );
+      AppNavigator.pushReplacement(LandingView.routeName);
     }).catchError((e) {
-      print(e.toString());
+      showToasts(
+        color: Colors.red,
+        text: e.toString(),
+      );
     });
-  }
-
-  void createUsers({
-    required String email,
-    required String uid,
-  }) {
-    LoginModel model = LoginModel(
-      uid: uid,
-      email: email,
-    );
-    FirebaseFirestore.instance.collection('users').doc(uid).set(model.toMap());
   }
 
   void _inti() async {
@@ -57,7 +51,7 @@ class AuthController with ChangeNotifier {
     final currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser != null) {
-      AppNavigator.push(LandingView.routeName);
+      AppNavigator.pushReplacement(LandingView.routeName);
     } else {
       AppNavigator.push(AuthView.routeName);
     }
