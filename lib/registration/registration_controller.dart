@@ -15,7 +15,7 @@ class RegistrationController with ChangeNotifier {
     required String whatsAppNumber,
     required String idNational,
     required String placeOfElection,
-    required String dateTime,
+    // required String dateTime,
   }) {
     RegistrationModel model = RegistrationModel(
       name: name,
@@ -23,7 +23,7 @@ class RegistrationController with ChangeNotifier {
       uid: FirebaseAuth.instance.currentUser!.uid,
       idNational: idNational,
       placeOfElectin: placeOfElection,
-      dateTime: dateTime,
+      dateTime: DateTime.now(),
     );
     FirebaseFirestore.instance
         .collection('users')

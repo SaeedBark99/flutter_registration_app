@@ -51,6 +51,7 @@ class FormText extends StatelessWidget {
               ),
               DefaultTextFromFile(
                 controller: controller.nameController,
+                type: TextInputType.text,
                 lable: 'Enter your name',
                 validator: (value) {
                   if (value.isEmpty) {
@@ -64,6 +65,7 @@ class FormText extends StatelessWidget {
               ),
               DefaultTextFromFile(
                 controller: controller.idNationalController,
+                type: TextInputType.number,
                 lable: 'Enter your Identification number',
                 maxLength: 10,
                 validator: (value) {
@@ -78,6 +80,7 @@ class FormText extends StatelessWidget {
               ),
               DefaultTextFromFile(
                 controller: controller.numberController,
+                type: TextInputType.phone,
                 maxLength: 8,
                 lable: 'Enter your whatsApp number',
                 validator: (value) {
@@ -92,6 +95,7 @@ class FormText extends StatelessWidget {
               ),
               DefaultTextFromFile(
                 controller: controller.placeOfElectionController,
+                type: TextInputType.text,
                 lable: 'Enter your Place of election ',
                 validator: (value) {
                   if (value.isEmpty) {
@@ -112,7 +116,7 @@ class FormText extends StatelessWidget {
                       idNational: controller.idNationalController.text,
                       placeOfElection:
                           controller.placeOfElectionController.text,
-                      dateTime: DateTime.now().toString(),
+                      //  dateTime: ,
                     );
                     showToasts(
                         color: Colors.green,
